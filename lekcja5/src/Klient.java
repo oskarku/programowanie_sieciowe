@@ -8,12 +8,18 @@
        public static final int PORT=50002;
        public static final String HOST = "192.168.0.101";
      
-       public static void main(String[] args) throws IOException                            
-       {                                                                                   
+       public static void main(String[] args)                            
+       {  try {
+    	   
+    	  
           //nawiazanie polaczenia z serwerem                                               
           Socket sock;                                                                     
           sock=new Socket(HOST,PORT);                                                      
-          System.out.println("Nawiazalem polaczenie: "+sock);                              
+          System.out.println("Nawiazalem polaczenie: "+sock);
+  
+          
+
+       
      
           //tworzenie strumieni danych pobieranych z klawiatury i dostarczanych do socketu 
           BufferedReader klaw;                                                             
@@ -23,7 +29,7 @@
           
           BufferedReader inp;                                                    
           inp=new BufferedReader(new InputStreamReader(sock.getInputStream())); 
-          
+    	   
  
           
                                                            
@@ -43,14 +49,22 @@
         	  
         	  
           }
-      
-          
-       
- 
           //zamykanie polaczenia                                                           
           klaw.close();                                                                    
           outp.close();                                                                    
-          sock.close();                                                                    
+          sock.close(); 
+       }
+       catch (UnknownHostException o){
+    	   System.out.println("Mam problem z poloczeniem lokalnym , sprawdz ip i port");
+       } 
+       catch (SocketException l) {
+    	   System.out.println("Wyglada na to ze mmay problem z polaczeniem , sprawdz kabel od internetu :) ");
+       }
+       catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+       
        }                                                                                   
     }
 
